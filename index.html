@@ -3,892 +3,520 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<link rel="manifest" href="manifest.json">
     <title>Benaion Delivery - Oficial</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
         :root { 
             --vermelho: #bc0000; 
             --amarelo: #f2b705; 
-            --fundo: #f8f9fa; 
+            --fundo: #f5f5f0; 
             --sucesso: #25d366; 
-            --texto: #333;
-            --branco: #ffffff;
             --escuro: #1a1a1a;
+            --branco: #ffffff;
         }
 
+        * { box-sizing: border-box; }
         body { 
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-            margin: 0; 
-            background: var(--fundo); 
-            color: var(--texto); 
-            line-height: 1.5; 
-            padding-top: 40px; /* Espaço para o menu fixo */
+            font-family: 'DM Sans', sans-serif; 
+            margin: 0; background: var(--fundo); 
+            color: var(--escuro); scroll-behavior: smooth;
+            padding-bottom: 80px;
         }
-        /* NAVBAR - Melhor contraste */
+
+        /* Navbar */
         nav {
             position: fixed; top: 0; width: 100%; background: var(--escuro);
-            height: 40px; display: flex; justify-content: center; align-items: center;
+            height: 48px; display: flex; justify-content: center; align-items: center;
             z-index: 1000; border-bottom: 3px solid var(--amarelo);
         }
+        nav a { color: var(--amarelo); text-decoration: none; margin: 0 10px; font-weight: bold; font-size: 0.7rem; text-transform: uppercase; }
 
-        nav a { color: var(--amarelo); text-decoration: none; margin: 0 8px; font-weight: bold; font-size: 0.75rem; text-transform: uppercase; }
-
+        /* Header Estilo iFood */
         header { 
-            background: var(--vermelho); 
-            color: white; 
-            padding: 50px 15px 35px; 
-            text-align: center; 
-            border-bottom: 6px solid var(--amarelo); 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            background: var(--vermelho); color: white; 
+            padding: 70px 20px 40px; text-align: center; 
+            border-bottom: 6px solid var(--amarelo);
+            clip-path: ellipse(150% 100% at 50% 0%);
         }
         
         .logo-main { 
-            margin: 0; font-style: italic; font-weight: 900; 
-            color: var(--amarelo); font-size: 3.5rem; line-height: 0.9; 
-            text-shadow: 3px 3px 0px #000; letter-spacing: -2px; 
-            transform: skew(-5deg); cursor: pointer; 
+            font-family: 'Oswald', sans-serif; margin: 0; font-style: italic; 
+            font-weight: 900; color: var(--amarelo); font-size: 3.5rem; 
+            line-height: 0.8; text-shadow: 3px 3px 0px #000; 
+            transform: skew(-5deg); letter-spacing: -2px;
         }
 
-        .container { max-width: 550px; margin: 0 auto; padding: 20px 15px; }
+        .container { max-width: 500px; margin: 0 auto; padding: 20px 15px; }
         
         .card { 
-            background: var(--branco); border-radius: 12px; padding: 22px; 
-            margin-bottom: 25px; box-shadow: 0 6px 15px rgba(0,0,0,0.08); 
-            border-top: 5px solid var(--vermelho); 
+            background: var(--branco); border-radius: 15px; padding: 20px; 
+            margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            border-top: 4px solid var(--vermelho); 
         }
 
-        h3 { 
-            color: var(--vermelho); margin: 0 0 15px 0; display: flex;
-            align-items: center; gap: 10px; text-transform: uppercase; 
-            font-size: 1rem; letter-spacing: 0.5px; border-bottom: 2px solid #f8f9fa;
-            padding-bottom: 10px;
-        }
+        h3 { color: var(--vermelho); margin-top: 0; display: flex; align-items: center; gap: 8px; font-size: 1.1rem; }
 
-        /* ACCORDION - Como Cobramos */
-        .accordion-item { border-bottom: 1px solid #eee; margin-bottom: 5px; }
-        .accordion-header {
-            width: 100%; padding: 12px; text-align: left; background: #fffdf0;
-            border: 1px solid var(--amarelo); border-radius: 8px; cursor: pointer;
-            font-weight: bold; display: flex; justify-content: space-between;
-        }
-        .accordion-content {
-            display: none; padding: 10px; font-size: 0.9rem; background: #fff;
-            border: 1px solid #eee; border-top: none;
-        }
-        
-        .info-list { list-style: none; padding: 0; margin: 0; }
-        .info-list li { margin-bottom: 10px; padding-left: 28px; position: relative; font-size: 0.95rem; }
-        .info-list li::before { content: '✅'; position: absolute; left: 0; }
-        
-        .proibido { 80px
-            color: #721c24; font-size: 0.85rem; background: #f8d7da; 
-            padding: 12px; border-radius: 8px; border: 1px solid #f5c6cb; margin-top: 15px;
-        }
-.flyer-grid {
-    display: flex; /* Mantém lado a lado */
-    flex-wrap: nowrap; /* IMPEDE que as fotos caiam para a linha de baixo */
-    overflow-x: auto; /* Ativa o deslize para os lados */
-    gap: 12px;
-    padding: 10px;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-}
+        /* Grid de Serviços */
+        .service-grid { display: grid; grid-template-cols: 1fr 1fr; gap: 10px; }
+        .service-item { background: #fffdf0; padding: 10px; border-radius: 8px; border: 1px solid #f2b70533; font-weight: bold; font-size: 0.9rem; }
 
-.flyer-item { 
-    flex: 0 0 160px; /* Impede que a foto encolha, mantendo 160px de largura */
-    border-radius: 10px; 
-    overflow: hidden; 
-    border: 1px solid #eee;
-}
+        /* Accordion Preços */
+        .acc-btn {
+            width: 100%; padding: 12px; text-align: left; background: #f8f9fa;
+            border: 1px solid #ddd; border-radius: 8px; margin-bottom: 5px;
+            cursor: pointer; font-weight: bold; display: flex; justify-content: space-between;
+        }
+        .acc-content { display: none; padding: 10px; background: white; border-radius: 0 0 8px 8px; font-size: 0.9rem; border: 1px solid #eee; border-top: none; margin-bottom: 10px; }
 
-        .flyer-item:hover { transform: scale(1.00); }
-        .flyer-item img { width: 100%; height: free; display: flex; }
+        /* Flyer Slider */
+        .flyer-grid { display: flex; overflow-x: auto; gap: 12px; padding: 10px 0; scroll-snap-type: x mandatory; }
+        .flyer-item { flex: 0 0 160px; scroll-snap-align: start; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .flyer-item img { width: 100%; display: block; }
 
-        .form-group { margin-bottom: 18px; }
-        label { display: block; margin-bottom: 6px; font-weight: bold; font-size: 0.8rem; color: #555; text-transform: uppercase; }
-        input, textarea, select { width: 100%; padding: 14px; border: 2px solid #e9ecef; border-radius: 10px; font-size: 1rem; }
+        /* Formulário */
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.8rem; color: #666; }
+        input, textarea, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; }
         
         .btn-enviar { 
             background: var(--sucesso); color: white; border: none; width: 100%; 
-            padding: 20px; border-radius: 12px; font-weight: bold; font-size: 1.2rem; 
-            cursor: pointer; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            padding: 18px; border-radius: 12px; font-weight: bold; font-size: 1.1rem; 
+            cursor: pointer; transition: transform 0.2s;
+        }
+        .btn-enviar:active { transform: scale(0.98); }
+
+        /* Botão Flutuante */
+        .whatsapp-float {
+            position: fixed; bottom: 20px; right: 20px; background: var(--sucesso);
+            width: 60px; height: 60px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; color: white;
+            font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000;
         }
 
-        /* WHATSAPP FLUTUANTE */
-      /* Botão Flutuante do WhatsApp */
-.whatsapp-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    background-color: #25d366;
-    color: white;
-    border-radius: 50px;
-    text-align: center;
-    font-size: 35px;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-    z-index: 9999; /* Garante que fique por cima de tudo */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    transition: transform 0.3s;
-}
-
-.whatsapp-btn:hover {
-    transform: scale(1.1); /* Efeito de aumentar ao tocar */
-    color: white;
-}
-
-      #btn-admin { display: none; background: #333; color: #fff; border: none; padding: 12px; width: 100%; border-radius: 8px; margin-top: 15px; font-size: 0.8rem; cursor: pointer; }
-        .footer { text-align: center; color: #999; font-size: 0.8rem; padding: 40px 15px; }
-   </style>
+        .restricoes { background: #fee2e2; color: #991b1b; padding: 10px; border-radius: 8px; font-size: 0.8rem; margin-top: 10px; }
+    </style>
 </head>
 <body>
 
 <nav>
-    <a href="#nossos-servicos">Serviços</a>
-    <a href="#como-cobramos">Cobrança</a>
-    <a href="#cobertura">Cobertura</a>
-    <a href="#pedido">Pedir</a>
-  <a href="#parceiros">parceiros</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#precos">Taxas</a>
+    <a href="#comanda">Fazer Pedido</a>
 </nav>
 
 <header>
-    <div onclick="ativarAdmin()">
-        <h1 class="logo-main">BENAION</h1>
-        <p style="margin:0; letter-spacing: 5px; font-weight: bold;">DELIVERY</p>
-        <p style="font-style: italic; font-size: 0.9rem;">Conectando você ao que precisa, rápido e seguro</p>
-    </div>
+    <h1 class="logo-main" onclick="ativarAdmin()">BENAION</h1>
+    <p style="margin:0; letter-spacing: 4px; font-weight: bold; font-size: 0.8rem;">DELIVERY EM LARANJAL DO JARI</p>
 </header>
 
 <div class="container">
     
-    <div id="nossos-servicos" class="card">
-        <h3>📍 Nossos Serviços</h3>
-        <ul class="info-list">
-            <li><b>Farmácia:</b> Medicamentos e higiene</li>
-            <li><b>Comércios:</b> Supermercados e padarias</li>
-            <li><b>Documentos:</b> Coleta e entrega segura</li>
-            <li><b>Alimentação:</b> Restaurantes, Açaí e Assados</li>
-        </ul>
-        <div class="proibido">
-            🚫 <b>RESTRIÇÕES:</b> Não transportamos álcool, cigarros ou passageiros.
+    <section id="servicos" class="card">
+        <h3><i class="fas fa-box"></i> O que entregamos</h3>
+        <div class="service-grid">
+            <div class="service-item">💊 Farmácia</div>
+            <div class="service-item">🛒 Comércio</div>
+            <div class="service-item">🍞 Padaria</div>
+            <div class="service-item">📦 Encomendas</div>
+            <div class="service-item">🔑 Pessoais</div>
+            <div class="service-item">🍔 Alimentação</div>
         </div>
-    </div>
+        <div class="restricoes">
+            <strong>🚫 NÃO ENTREGAMOS:</strong> Bebidas alcoólicas, cigarros, drogas ou transporte de pessoas.
+        </div>
+    </section>
 
-    <div id="como-cobramos" class="card">
-        <h3>💰 Como Cobramos</h3>
-        <small style="display:block; margin-bottom:10px; color:#666;">Clique nos itens para ver os detalhes:</small>
-        
-        <div class="accordion-item">
-            <button class="accordion-header" onclick="toggleAccordion('acc1')">Bairro <span>+</span></button>
-            <div id="acc1" class="accordion-content">    
-  <ul>          
- <li>Agreste R$:5,00</li>
- <li>Nova esperança R$:5,00</li>
- <li>Prosperidade R$:5,00</li>
- <li> Castanheira R$:5,00</<li>
- <li>Cajari R$:6,00</li>
- <li> Rodovia do gogó R$:7,00</li>
- <li>buritizal R$:7,00</li>
- <li>Sarney R$:7,00</li>
-<li>Nazaré mineiro R$:10,00</li>
- <li>centro R$:6,00</li>
-    <li>centro-beira rio R$:7,00</li>
- <li>mirilandia R$:5,00</li>
- <li>Rio branco R$:7,00</li>
- <li>José cesário R$:5,00</li>
- <li>Malvinas R$:8,00</li>
- <li>samaúma R$:12,00</li>
- <li>monte dourado R$:30,00</li> 
-  </ul>       
-            </div>
-        </div>   
-       <div class="accordion-item">
-            <button class="accordion-header" onclick="toggleAccordion('acc2')">Por Tempo <span>+</span></button>
-            <div id="acc2" class="accordion-content">Serviços que exigem espera (ex: filas) têm acréscimo, Após 3 minuto no local de retirada 0,30R$ por minuto</div>
+    <section id="precos" class="card">
+        <h3><i class="fas fa-motorcycle"></i> Taxas de Entrega</h3>
+        <button class="acc-btn" onclick="toggleAcc('taxa-bairro')">Ver por Bairro <span>+</span></button>
+        <div id="taxa-bairro" class="acc-content">
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                <li>📍 Agreste / N. Esperança / Prosperidade: <b>R$ 5,00</b></li>
+                <li>📍 Castanheira / Mirilândia / J. Cesário: <b>R$ 5,00</b></li>
+                <li>📍 Cajari / Centro: <b>R$ 6,00</b></li>
+                <li>📍 Buritizal / Sarney / Rod. do Gogó: <b>R$ 7,00</b></li>
+                <li>📍 Rio Branco / Centro-Beira Rio: <b>R$ 7,00</b></li>
+                <li>📍 Malvinas: <b>R$ 8,00</b></li>
+                <li>📍 Nazaré Mineiro: <b>R$ 10,00</b></li>
+                <li>📍 Samaúma: <b>R$ 15,00</b></li>
+                <li>📍 Monte Dourado: <b>R$ 30,00</b></li>
+            </ul>
         </div>
 
-        <div class="accordion-item">
-            <button class="accordion-header" onclick="toggleAccordion('acc3')">Esforço Extra <span>+</span></button>
-            <div id="acc3" class="accordion-content"><p> adicional para entrar em ponte: 0,05R$ por metro( medido pelo google maps.</p>
-           <p> •para subir escada:2,00R$ por andar</p> </div>
+        <button class="acc-btn" onclick="toggleAcc('taxa-extra')">Adicionais de Esforço <span>+</span></button>
+        <div id="taxa-extra" class="acc-content">
+            • Subir Escadas: <b>R$ 2,00 por andar</b><br>
+            • Entrar em Pontes: <b>R$ 0,05 por metro</b><br>
+            • Tempo de espera: <b>R$ 0,30/min</b> (após 3min)
         </div>
-      
-<div class="accordion-item">
-  <button class= "accordion-header" onclick="toggleAccordion('acc4')
-    ">Quantidade de produtos <span>+</span></button>
-  
-  <div id="acc4" class="accordion-content"> medido pela bag de 45lt:
-<p> •menos da metade da bag (grátis) </p>
-<p>•Metade R$2,00</p>
-<p>•cheia R$5,00</p>
-  </div>
-</div>
-    <div id="cobertura" class="card" style="display: flex; justify-content: space-between; border-top: 5px solid var(--amarelo);">
-        <div><span style="font-size:0.7rem; color:#888;">COBERTURA</span><br><b>Laranjal do Jari / Monte Dourado</b></div>
-        <div style="text-align: right;"><span style="font-size:0.7rem; color:#888;">HORÁRIO</span><br><b>07:30 às 18:00 (Dom-Sex)</b></div>
-    </div>
-<div id="parcerios" class="card">
-        <h3>📸 Promoções e Parceiros</h3>
+    </section>
+
+    <div class="card">
+        <h3><i class="fas fa-fire"></i> Promoções e Parceiros</h3>
         <div class="flyer-grid">
-            <div class="flyer-item"><img src="https://i.postimg.cc/XJwXkcfP/Post_para_Instagram_Encomende_seu_Frango_Assado_Gastronômico_Marrom_20250910_122450_0000.png" alt="Frango"></div>
-            <div class="flyer-item"><img src="https://i.postimg.cc/L525CYvJ/Post_Instagram_açaí_entrega_grátis_simples_roxo_20260122_073356_0000.png" alt="Açaí"></div>
-            <div class="flyer-item"><img src="https://i.postimg.cc/Y0M0nG8j/Marrom_Pão_Cesta_Padaria_Cardápio_20260213_053737_0000.png" alt="Pão"></div>
-            <div class="flyer-item"><img src="https://i.postimg.cc/cHQ6BM7S/Cardápio_marmitex_almoço_restaurante_moderno_amarelo_marrom_instagram_story_20260123_110156_0000.png" alt="Marmitex"></div>  
-         <div class="flyer-item"><img src="https://i.postimg.cc/bvPKpJCF/1_20260204_161355_0000.png"> </div>         
-</div>
-  <div id="login-area">
+            <div class="flyer-item"><img src="https://i.postimg.cc/XJwXkcfP/Post_para_Instagram_Encomende_seu_Frango_Assado_Gastronômico_Marrom_20250910_122450_0000.png"></div>
+            <div class="flyer-item"><img src="https://i.postimg.cc/L525CYvJ/Post_Instagram_açaí_entrega_grátis_simples_roxo_20260122_073356_0000.png"></div>
+            <div class="flyer-item"><img src="https://i.postimg.cc/Y0M0nG8j/Marrom_Pão_Cesta_Padaria_Cardápio_20260213_053737_0000.png"></div>
+            <div class="flyer-item"><img src="https://i.postimg.cc/bvPKpJCF/1_20260204_161355_0000.png"></div>
+        </div>
+    </div>
 
-<h3>Entrar</h3>
-
-<input type="text" id="login-nome" placeholder="Seu nome">
-
-<input type="tel" id="login-telefone" placeholder="Seu telefone">
-
-<button onclick="loginCliente()">Entrar</button>
-
-  </div>
-    <div id="pedido" class="card">
-        <h3>📝 Comanda de Pedido</h3>
-        
+    <section id="comanda" class="card">
+        <h3><i class="fas fa-file-alt"></i> Comanda de Pedido</h3>
         <div class="form-group">
-            <label>Seu Nome:</label>
-            <input type="text" id="cliente" placeholder="Nome completo">
+            <label>NOME DO CLIENTE:</label>
+            <input type="text" id="cliente" placeholder="Como te chamamos?">
         </div>
         <div class="form-group">
-            <label>Onde buscamos? (Retirada):</label>
-            <textarea id="retirada" rows="2" placeholder="Nome do local ou endereço comercial"></textarea>
+            <label>ONDE BUSCAMOS? (RETIRADA):</label>
+            <input type="text" id="retirada" placeholder="Local ou nome da loja">
         </div>
-      
         <div class="form-group">
-            <label>O que vamos buscar? (Produtos):</label>
-            <textarea id="produto" rows="4" placeholder="Ex: 1 Frango assado, 2 cocas 2L..."></textarea>
+            <label>O QUE VAMOS BUSCAR?</label>
+            <textarea id="produto" rows="3" placeholder="Ex: 1 Marmitex média e 1 suco"></textarea>
         </div>
-
         <div class="form-group">
-            <label>Onde entregamos? (Destino):</label>
-            <input list="bairros" id="entrega" placeholder="Digite rua e selecione o bairro">
-
-<datalist id="bairros">
-<option>Agreste</option>
-<option>Nova Esperança</option>
-<option>Prosperidade</option>
-<option>Castanheira</option>
-<option>Cajari</option>
-<option>Rodovia do Gogó</option>
-<option>Buritizal</option>
-<option>Sarney</option>
-<option>Nazaré Mineiro</option>
-<option>Centro</option>
-<option>Centro Beira Rio</option>
-<option>Mirilândia</option>
-<option>Rio Branco</option>
-<option>José Cesário</option>
-<option>Malvinas</option>
-<option>Samaúma</option>
-<option>Monte Dourado</option>
-</datalist>
+            <label>ONDE ENTREGAMOS? (DESTINO):</label>
+            <input type="text" id="entrega" placeholder="Seu endereço completo">
         </div>
-
         <div class="form-group">
-            <label>Forma de Pagamento:</label>
+            <label>FORMA DE PAGAMENTO:</label>
             <select id="pagamento">
-                <option value="PIX 💰">PIX (Mais rápido)</option>
-                <option value="CARTÃO 💳">Cartão (Levamos a máquina)</option>
-                <option value="DINHEIRO 💵">Dinheiro</option>
+                <option value="PIX">PIX</option>
+                <option value="CARTÃO">Cartão (Levamos a máquina)</option>
+                <option value="DINHEIRO">Dinheiro</option>
             </select>
         </div>
+        <button class="btn-enviar" onclick="enviarPedido()">ENVIAR PEDIDO AGORA 🛵</button>
+        <button id="btn-admin" style="display:none; margin-top:10px; width:100%; padding:10px; background:#444; color:white; border:none; border-radius:8px;" onclick="resetarContador()">Reiniciar Comanda</button>
+    </section>
 
-        <div class="form-group">
-            <label>Observações / Troco:</label>
-            <textarea id="obs" rows="2" placeholder="Ex: Troco para 50, deixar na portaria..."></textarea>
-        </div>
-
-        <button class="btn-enviar" onclick="enviarWhatsApp()">ENVIAR PARA WHATSAPP 🛵</button>
-      <p id="msg-sucesso" style="display:none;color:green;font-weight:bold;"></p>
-        <button id="btn-admin" onclick="resetarContador()">🔄 REINICIAR Nº COMANDA (ADMIN)</button>
-      <button onclick="verClientes()">👥 Ver Clientes</button>
-      <button onclick="verPedidos()">Ver Pedidos</button>
-
-<button onclick="verRelatorio()">Relatório</button>
-
-<button onclick="verEntregasHoje()">Entregas Hoje</button>
-
-<button onclick="estatisticasEmpresa()">Estatísticas</button>
-
-<button onclick="backupPedidos()">Backup</button>
-    </div>
-<button onclick="verPedidos()">Ver Pedidos</button>
-
-<button onclick="verRelatorio()">Relatório</button>
-
-<button onclick="verEntregasHoje()">Entregas Hoje</button>
-
-<button onclick="estatisticasEmpresa()">Estatísticas</button>
-
-<button onclick="backupPedidos()">Backup</button>
-    <div class="footer">
-        <b>Benaion Delivery</b><br>
-        Excelência em logística urbana desde 2023.
+    <div style="text-align: center; font-size: 0.8rem; color: #888; padding: 20px;">
+        <b>Benaion Delivery</b> - Desde 2023<br>
+        Seg à Sex: 07:30 às 18:00
     </div>
 </div>
-<a href="https://wa.me/5596991677854?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20fazer%20um%20pedido." class="whatsapp-btn" target="_blank">
+
+<a href="https://wa.me/5596991677854" class="whatsapp-float" target="_blank">
     <i class="fab fa-whatsapp"></i>
 </a>
 
 <script>
-  function verClientes(){
-
-let clientes = JSON.parse(localStorage.getItem("clientes_benaion")) || [];
-
-if(clientes.length === 0){
-
-alert("Nenhum cliente cadastrado.");
-
-return;
-
-}
-
-let lista = "";
-
-clientes.forEach(c => {
-
-lista +=
-"Cliente: "+c.nome+
-"\nTelefone: "+c.telefone+
-"\nEndereço: "+c.endereco+
-"\nPedidos: "+c.pedidos+
-"\n\n";
-
-});
-
-alert(lista);
-
-  } 
-function salvarCliente(nome, telefone, endereco){
-
-let clientes = JSON.parse(localStorage.getItem("clientes_benaion")) || [];
-
-let clienteExistente = clientes.find(c => c.telefone === telefone);
-
-if(clienteExistente){
-
-clienteExistente.pedidos += 1;
-clienteExistente.endereco = endereco;
-
-}else{
-
-clientes.push({
-nome:nome,
-telefone:telefone,
-endereco:endereco,
-pedidos:1
-});
-
-}
-
-localStorage.setItem("clientes_benaion", JSON.stringify(clientes));
-
-}
-function loginCliente(){
-
-let nome = document.getElementById("login-nome").value;
-let telefone = document.getElementById("login-telefone").value;
-
-if(nome.length < 3){
-alert("Digite seu nome");
-return;
-}
-
-localStorage.setItem("cliente_nome", nome);
-localStorage.setItem("cliente_tel", telefone);
-
-alert("Login realizado!");
-
-preencherCliente();
-
-}
-
-function preencherCliente(){
-
-let nome = localStorage.getItem("cliente_nome");
-
-if(nome){
-
-document.getElementById("cliente").value = nome;
-
-}
-
-}
-
-document.addEventListener("DOMContentLoaded", preencherCliente);
-// =============================
-// CONFIGURAÇÃO DE TAXAS
-// =============================
-
-const taxasBairros = {
-"agreste":5,
-"nova esperança":5,
-"prosperidade":5,
-"castanheira":5,
-"cajari":6,
-"rodovia do gogó":7,
-"buritizal":7,
-"sarney":7,
-"nazaré mineiro":10,
-"centro":6,
-"centro-beira rio":7,
-"mirilandia":5,
-"rio branco":7,
-"josé cesário":5,
-"malvinas":8,
-"samaúma":12,
-"monte dourado":30
-};
-
-// =============================
-// ADMIN
-// =============================
-
-let cliquesAdmin = 0;
-
-// =============================
-// CALCULAR TAXA AUTOMÁTICA
-// =============================
-
-function calcularTaxa(destino){
-
-destino = destino.toLowerCase();
-
-for(let bairro in taxasBairros){
-
-if(destino.includes(bairro)){
-return taxasBairros[bairro];
-}
-
-}
-
-return 0;
-
-}
-
-// =============================
-// SALVAR PEDIDO
-// =============================
-
-function salvarPedido(pedido){
-
-let pedidos = JSON.parse(localStorage.getItem("historico_benaion")) || [];
-
-pedidos.push(pedido);
-
-localStorage.setItem("historico_benaion", JSON.stringify(pedidos));
-
-}
-
-// =============================
-// PEDIDOS HOJE
-// =============================
-
-function pedidosHoje(){
-
-let pedidos = JSON.parse(localStorage.getItem("historico_benaion")) || [];
-
-let hoje = new Date().toLocaleDateString();
-
-let total = pedidos.filter(p => p.data.includes(hoje)).length;
-
-return total;
-
-}
-
-// =============================
-// FATURAMENTO HOJE
-// =============================
-
-function faturamentoHoje(){
-
-let pedidos = JSON.parse(localStorage.getItem("historico_benaion")) || [];
-
-let hoje = new Date().toLocaleDateString();
-
-let total = 0;
-
-pedidos.forEach(p=>{
-
-if(p.data.includes(hoje)){
-
-total += Number(p.taxa);
-
-}
-
-});
-
-return total;
-
-}
-
-// =============================
-// LUCRO DO DIA
-// =============================
-
-function lucroHoje(){
-
-let faturamento = faturamentoHoje();
-
-let custoEntregador = 70;
-
-return faturamento - custoEntregador;
-
-}
-
-// =============================
-// RELATÓRIO
-// =============================
-
-function verRelatorio(){
-
-alert(
-
-"RELATÓRIO BENAION\n\n"+
-"Pedidos hoje: "+pedidosHoje()+
-"\nFaturamento: R$ "+faturamentoHoje()+
-"\nLucro estimado: R$ "+lucroHoje()
-
-);
-
-}
-
-// =============================
-// VER PEDIDOS
-// =============================
-
-function verPedidos(){
-
-let pedidos = JSON.parse(localStorage.getItem("historico_benaion")) || [];
-
-if(pedidos.length === 0){
-
-alert("Nenhum pedido registrado.");
-
-return;
-
-}
-
-let lista = "";
-
-pedidos.reverse().forEach(p=>{
-
-lista +=
-
-"Pedido #"+p.numero+"\n"+
-"Cliente: "+p.cliente+"\n"+
-"Destino: "+p.destino+"\n"+
-"Taxa: R$ "+p.taxa+"\n"+
-"Data: "+p.data+"\n\n";
-
-});
-
-alert(lista);
-
-}
-
-// =============================
-// ENTREGAS DE HOJE
-// =============================
-
-function verEntregasHoje(){
-
-let pedidos = JSON.parse(localStorage.getItem("historico_benaion")) || [];
-
-let hoje = new Date().toLocaleDateString();
-
-let lista = "";
-let total = 0;
-
-pedidos.forEach(p=>{
-
-if(p.data.includes(hoje)){
-
-total++;
-
-lista +=
-
-"#"+p.numero+
-"\nCliente: "+p.cliente+
-"\nDestino: "+p.destino+
-"\nTaxa: R$"+p.taxa+
-"\n\n";
-
-}
-
-});
-
-alert(
-
-"ENTREGAS DE HOJE\n\n"+
-"Total: "+total+
-"\n\n"+lista
-
-);
-
-}
-
-// =============================
-// ESTATÍSTICAS DA EMPRESA
-// =============================
-
-function estatisticasEmpresa(){
-
-let pedidos = JSON.parse(localStorage.getItem("historico_benaion")) || [];
-
-let total = pedidos.length;
-
-let faturamento = 0;
-
-pedidos.forEach(p=>{
-
-faturamento += Number(p.taxa);
-
-});
-
-alert(
-
-"ESTATÍSTICAS BENAION\n\n"+
-"Pedidos totais: "+total+
-"\nFaturamento total: R$ "+faturamento
-
-);
-
-}
-
-// =============================
-// ALERTA SONORO
-// =============================
-
-function alertaPedido(){
-
-let audio = new Audio("https://www.soundjay.com/buttons/sounds/button-3.mp3");
-
-audio.play();
-
-}
-
-// =============================
-// NUMERO COMANDA
-// =============================
-
-function obterProximoNumeroComanda(){
-
-let n = localStorage.getItem('n_ped_benaion');
-
-if(!n){
-n = 0;
-}
-
-n = parseInt(n) + 1;
-
-localStorage.setItem('n_ped_benaion', n);
-
-return n.toString().padStart(3,'0');
-
-}
-
-// =============================
-// ANTI SPAM
-// =============================
-
-function verificarSpam(){
-
-let ultimoPedido = localStorage.getItem("ultimo_pedido");
-
-if(ultimoPedido && Date.now() - ultimoPedido < 30000){
-
-alert("Aguarde 30 segundos para novo pedido.");
-
-return true;
-
-}
-
-localStorage.setItem("ultimo_pedido", Date.now());
-
-return false;
-
-}
-
-// =============================
-// ENVIAR WHATSAPP
-// =============================
-
-function enviarWhatsApp(){
-salvarCliente(cliente, telefone, entrega);
-salvarPedido({
-numero:numComanda,
-cliente:cliente,
-destino:entrega,
-taxa:taxa,
-data:data
-});
-  
-const cliente = document.getElementById('cliente').value;
-const retirada = document.getElementById('retirada').value;
-const produto = document.getElementById('produto').value;
-const entrega = document.getElementById('entrega').value;
-const pagamento = document.getElementById('pagamento').value;
-const obs = document.getElementById('obs').value || "Não informado";
-
-if(cliente.length < 3 || retirada.length < 3 || produto.length < 2 || entrega.length < 5){
-
-alert("Preencha corretamente os campos.");
-
-return;
-
-}
-
-if(verificarSpam()) return;
-
-const taxa = calcularTaxa(entrega);
-const numComanda = obterProximoNumeroComanda();
-const data = new Date().toLocaleString();
-
-salvarPedido({
-
-numero:numComanda,
-cliente:cliente,
-retirada:retirada,
-produto:produto,
-destino:entrega,
-pagamento:pagamento,
-taxa:taxa,
-data:data
-
-});
-
-alertaPedido();
-
-const msg =
-
-"*BENAION DELIVERY - PEDIDO #"+numComanda+"*%0A"+
-"----------------------------%0A"+
-"Cliente: "+cliente+"%0A"+
-"Retirada: "+retirada+"%0A"+
-"Produto: "+produto+"%0A"+
-"Destino: "+entrega+"%0A"+
-"Pagamento: "+pagamento+"%0A"+
-"Taxa estimada: R$ "+taxa+"%0A"+
-"Obs: "+obs+"%0A"+
-"----------------------------";
-
-navigator.clipboard.writeText(msg);
-document.getElementById("msg-sucesso").style.display="block";
-document.getElementById("msg-sucesso").innerText="Pedido enviado com sucesso!";
-const link = "https://wa.me/5596991677854?text="+msg;
-
-window.open(link,'_blank');
-
-}
-
-// =============================
-// RESET CONTADOR
-// =============================
-
-function resetarContador(){
-
-const senha = prompt("Senha administrador:");
-
-if(senha === "benaion2026"){
-
-localStorage.setItem('n_ped_benaion',0);
-
-alert("Contador reiniciado.");
-
-location.reload();
-
-}else{
-
-alert("Senha incorreta");
-
-}
-
-}
-
-// =============================
-// LIMPAR SISTEMA
-// =============================
-
-function limparSistema(){
-
-const senha = prompt("Senha administrador:");
-
-if(senha === "benaion2026"){
-
-localStorage.removeItem("historico_benaion");
-
-alert("Sistema limpo.");
-
-}
-
-}
-
-// =============================
-// BACKUP
-// =============================
-
-function backupPedidos(){
-
-let pedidos = localStorage.getItem("historico_benaion");
-
-navigator.clipboard.writeText(pedidos);
-
-alert("Backup copiado.");
-
-}
-
-// =============================
-// ACCORDION
-// =============================
-
-function toggleAccordion(id){
-
-const content = document.getElementById(id);
-
-const isOpen = content.style.display === "block";
-
-document.querySelectorAll('.accordion-content')
-.forEach(el => el.style.display = 'none');
-
-content.style.display = isOpen ? "none" : "block";
-
-}
-
-// =============================
-// ATIVAR ADMIN
-// =============================
-
-document.addEventListener("DOMContentLoaded", function(){
-
-const logo = document.querySelector('.logo-main');
-
-logo.addEventListener('click', function(){
-
-cliquesAdmin++;
-
-if(cliquesAdmin >= 3){
-
-document.getElementById('btn-admin').style.display = 'block';
-
-alert("Modo administrador ativado");
-
-}
-
-});
-
-});
-
+    function toggleAcc(id) {
+        const content = document.getElementById(id);
+        const isVisible = content.style.display === "block";
+        document.querySelectorAll('.acc-content').forEach(el => el.style.display = 'none');
+        content.style.display = isVisible ? "none" : "block";
+    }
+
+    let cliquesAdmin = 0;
+    function ativarAdmin() {
+        cliquesAdmin++;
+        if(cliquesAdmin >= 5) {
+            document.getElementById('btn-admin').style.display = 'block';
+            alert("Modo Admin Ativo");
+        }
+    }
+
+    function enviarPedido() {
+        const cliente = document.getElementById('cliente').value;
+        const retirada = document.getElementById('retirada').value;
+        const produto = document.getElementById('produto').value;
+        const entrega = document.getElementById('entrega').value;
+        const pagamento = document.getElementById('pagamento').value;
+
+        if(!cliente || !retirada || !produto || !entrega) {
+            alert("Preencha todos os campos!");
+            return;
+        }
+
+        let n = localStorage.getItem('n_benaion') || 0;
+        n = parseInt(n) + 1;
+        localStorage.setItem('n_benaion', n);
+        const num = n.toString().padStart(3, '0');
+
+        const texto = `*BENAION DELIVERY - PEDIDO #${num}*%0A` +
+                      `----------------------------%0A` +
+                      `*Cliente:* ${cliente}%0A` +
+                      `*Retirada:* ${retirada}%0A` +
+                      `*Produtos:* ${produto}%0A` +
+                      `*Destino:* ${entrega}%0A` +
+                      `*Pagamento:* ${pagamento}%0A` +
+                      `----------------------------`;
+
+        window.open(`https://wa.me/5596991677854?text=${texto}`, '_blank');
+    }
+
+    function resetarContador() {
+        if(confirm("Deseja voltar o pedido para #001?")) {
+            localStorage.setItem('n_benaion', 0);
+            location.reload();
+        }
+    }
 </script>
+
 </body>
-    </html>
+</html>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benaion Delivery - Oficial</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { 
+            --vermelho: #bc0000; 
+            --amarelo: #f2b705; 
+            --fundo: #f5f5f0; 
+            --sucesso: #25d366; 
+            --escuro: #1a1a1a;
+            --branco: #ffffff;
+        }
+
+        * { box-sizing: border-box; }
+        body { 
+            font-family: 'DM Sans', sans-serif; 
+            margin: 0; background: var(--fundo); 
+            color: var(--escuro); scroll-behavior: smooth;
+            padding-bottom: 80px;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed; top: 0; width: 100%; background: var(--escuro);
+            height: 48px; display: flex; justify-content: center; align-items: center;
+            z-index: 1000; border-bottom: 3px solid var(--amarelo);
+        }
+        nav a { color: var(--amarelo); text-decoration: none; margin: 0 10px; font-weight: bold; font-size: 0.7rem; text-transform: uppercase; }
+
+        /* Header Estilo iFood */
+        header { 
+            background: var(--vermelho); color: white; 
+            padding: 70px 20px 40px; text-align: center; 
+            border-bottom: 6px solid var(--amarelo);
+            clip-path: ellipse(150% 100% at 50% 0%);
+        }
+        
+        .logo-main { 
+            font-family: 'Oswald', sans-serif; margin: 0; font-style: italic; 
+            font-weight: 900; color: var(--amarelo); font-size: 3.5rem; 
+            line-height: 0.8; text-shadow: 3px 3px 0px #000; 
+            transform: skew(-5deg); letter-spacing: -2px;
+        }
+
+        .container { max-width: 500px; margin: 0 auto; padding: 20px 15px; }
+        
+        .card { 
+            background: var(--branco); border-radius: 15px; padding: 20px; 
+            margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            border-top: 4px solid var(--vermelho); 
+        }
+
+        h3 { color: var(--vermelho); margin-top: 0; display: flex; align-items: center; gap: 8px; font-size: 1.1rem; }
+
+        /* Grid de Serviços */
+        .service-grid { display: grid; grid-template-cols: 1fr 1fr; gap: 10px; }
+        .service-item { background: #fffdf0; padding: 10px; border-radius: 8px; border: 1px solid #f2b70533; font-weight: bold; font-size: 0.9rem; }
+
+        /* Accordion Preços */
+        .acc-btn {
+            width: 100%; padding: 12px; text-align: left; background: #f8f9fa;
+            border: 1px solid #ddd; border-radius: 8px; margin-bottom: 5px;
+            cursor: pointer; font-weight: bold; display: flex; justify-content: space-between;
+        }
+        .acc-content { display: none; padding: 10px; background: white; border-radius: 0 0 8px 8px; font-size: 0.9rem; border: 1px solid #eee; border-top: none; margin-bottom: 10px; }
+
+        /* Flyer Slider */
+        .flyer-grid { display: flex; overflow-x: auto; gap: 12px; padding: 10px 0; scroll-snap-type: x mandatory; }
+        .flyer-item { flex: 0 0 160px; scroll-snap-align: start; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .flyer-item img { width: 100%; display: block; }
+
+        /* Formulário */
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.8rem; color: #666; }
+        input, textarea, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; }
+        
+        .btn-enviar { 
+            background: var(--sucesso); color: white; border: none; width: 100%; 
+            padding: 18px; border-radius: 12px; font-weight: bold; font-size: 1.1rem; 
+            cursor: pointer; transition: transform 0.2s;
+        }
+        .btn-enviar:active { transform: scale(0.98); }
+
+        /* Botão Flutuante */
+        .whatsapp-float {
+            position: fixed; bottom: 20px; right: 20px; background: var(--sucesso);
+            width: 60px; height: 60px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; color: white;
+            font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000;
+        }
+
+        .restricoes { background: #fee2e2; color: #991b1b; padding: 10px; border-radius: 8px; font-size: 0.8rem; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#servicos">Serviços</a>
+    <a href="#precos">Taxas</a>
+    <a href="#comanda">Fazer Pedido</a>
+</nav>
+
+<header>
+    <h1 class="logo-main" onclick="ativarAdmin()">BENAION</h1>
+    <p style="margin:0; letter-spacing: 4px; font-weight: bold; font-size: 0.8rem;">DELIVERY EM LARANJAL DO JARI</p>
+</header>
+
+<div class="container">
+    
+    <section id="servicos" class="card">
+        <h3><i class="fas fa-box"></i> O que entregamos</h3>
+        <div class="service-grid">
+            <div class="service-item">💊 Farmácia</div>
+            <div class="service-item">🛒 Comércio</div>
+            <div class="service-item">🍞 Padaria</div>
+            <div class="service-item">📦 Encomendas</div>
+            <div class="service-item">🔑 Pessoais</div>
+            <div class="service-item">🍔 Alimentação</div>
+        </div>
+        <div class="restricoes">
+            <strong>🚫 NÃO ENTREGAMOS:</strong> Bebidas alcoólicas, cigarros, drogas ou transporte de pessoas.
+        </div>
+    </section>
+
+    <section id="precos" class="card">
+        <h3><i class="fas fa-motorcycle"></i> Taxas de Entrega</h3>
+        <button class="acc-btn" onclick="toggleAcc('taxa-bairro')">Ver por Bairro <span>+</span></button>
+        <div id="taxa-bairro" class="acc-content">
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                <li>📍 Agreste / N. Esperança / Prosperidade: <b>R$ 5,00</b></li>
+                <li>📍 Castanheira / Mirilândia / J. Cesário: <b>R$ 5,00</b></li>
+                <li>📍 Cajari / Centro: <b>R$ 6,00</b></li>
+                <li>📍 Buritizal / Sarney / Rod. do Gogó: <b>R$ 7,00</b></li>
+                <li>📍 Rio Branco / Centro-Beira Rio: <b>R$ 7,00</b></li>
+                <li>📍 Malvinas: <b>R$ 8,00</b></li>
+                <li>📍 Nazaré Mineiro: <b>R$ 10,00</b></li>
+                <li>📍 Samaúma: <b>R$ 15,00</b></li>
+                <li>📍 Monte Dourado: <b>R$ 30,00</b></li>
+            </ul>
+        </div>
+
+        <button class="acc-btn" onclick="toggleAcc('taxa-extra')">Adicionais de Esforço <span>+</span></button>
+        <div id="taxa-extra" class="acc-content">
+            • Subir Escadas: <b>R$ 2,00 por andar</b><br>
+            • Entrar em Pontes: <b>R$ 0,05 por metro</b><br>
+            • Tempo de espera: <b>R$ 0,30/min</b> (após 3min)
+        </div>
+    </section>
+
+    <div class="card">
+        <h3><i class="fas fa-fire"></i> Promoções e Parceiros</h3>
+        <div class="flyer-grid">
+            <div class="flyer-item"><img src="https://i.postimg.cc/XJwXkcfP/Post_para_Instagram_Encomende_seu_Frango_Assado_Gastronômico_Marrom_20250910_122450_0000.png"></div>
+            <div class="flyer-item"><img src="https://i.postimg.cc/L525CYvJ/Post_Instagram_açaí_entrega_grátis_simples_roxo_20260122_073356_0000.png"></div>
+            <div class="flyer-item"><img src="https://i.postimg.cc/Y0M0nG8j/Marrom_Pão_Cesta_Padaria_Cardápio_20260213_053737_0000.png"></div>
+            <div class="flyer-item"><img src="https://i.postimg.cc/bvPKpJCF/1_20260204_161355_0000.png"></div>
+        </div>
+    </div>
+
+    <section id="comanda" class="card">
+        <h3><i class="fas fa-file-alt"></i> Comanda de Pedido</h3>
+        <div class="form-group">
+            <label>NOME DO CLIENTE:</label>
+            <input type="text" id="cliente" placeholder="Como te chamamos?">
+        </div>
+        <div class="form-group">
+            <label>ONDE BUSCAMOS? (RETIRADA):</label>
+            <input type="text" id="retirada" placeholder="Local ou nome da loja">
+        </div>
+        <div class="form-group">
+            <label>O QUE VAMOS BUSCAR?</label>
+            <textarea id="produto" rows="3" placeholder="Ex: 1 Marmitex média e 1 suco"></textarea>
+        </div>
+        <div class="form-group">
+            <label>ONDE ENTREGAMOS? (DESTINO):</label>
+            <input type="text" id="entrega" placeholder="Seu endereço completo">
+        </div>
+        <div class="form-group">
+            <label>FORMA DE PAGAMENTO:</label>
+            <select id="pagamento">
+                <option value="PIX">PIX</option>
+                <option value="CARTÃO">Cartão (Levamos a máquina)</option>
+                <option value="DINHEIRO">Dinheiro</option>
+            </select>
+        </div>
+        <button class="btn-enviar" onclick="enviarPedido()">ENVIAR PEDIDO AGORA 🛵</button>
+        <button id="btn-admin" style="display:none; margin-top:10px; width:100%; padding:10px; background:#444; color:white; border:none; border-radius:8px;" onclick="resetarContador()">Reiniciar Comanda</button>
+    </section>
+
+    <div style="text-align: center; font-size: 0.8rem; color: #888; padding: 20px;">
+        <b>Benaion Delivery</b> - Desde 2023<br>
+        Seg à Sex: 07:30 às 18:00
+    </div>
+</div>
+
+<a href="https://wa.me/5596991677854" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+    function toggleAcc(id) {
+        const content = document.getElementById(id);
+        const isVisible = content.style.display === "block";
+        document.querySelectorAll('.acc-content').forEach(el => el.style.display = 'none');
+        content.style.display = isVisible ? "none" : "block";
+    }
+
+    let cliquesAdmin = 0;
+    function ativarAdmin() {
+        cliquesAdmin++;
+        if(cliquesAdmin >= 5) {
+            document.getElementById('btn-admin').style.display = 'block';
+            alert("Modo Admin Ativo");
+        }
+    }
+
+    function enviarPedido() {
+        const cliente = document.getElementById('cliente').value;
+        const retirada = document.getElementById('retirada').value;
+        const produto = document.getElementById('produto').value;
+        const entrega = document.getElementById('entrega').value;
+        const pagamento = document.getElementById('pagamento').value;
+
+        if(!cliente || !retirada || !produto || !entrega) {
+            alert("Preencha todos os campos!");
+            return;
+        }
+
+        let n = localStorage.getItem('n_benaion') || 0;
+        n = parseInt(n) + 1;
+        localStorage.setItem('n_benaion', n);
+        const num = n.toString().padStart(3, '0');
+
+        const texto = `*BENAION DELIVERY - PEDIDO #${num}*%0A` +
+                      `----------------------------%0A` +
+                      `*Cliente:* ${cliente}%0A` +
+                      `*Retirada:* ${retirada}%0A` +
+                      `*Produtos:* ${produto}%0A` +
+                      `*Destino:* ${entrega}%0A` +
+                      `*Pagamento:* ${pagamento}%0A` +
+                      `----------------------------`;
+
+        window.open(`https://wa.me/5596991677854?text=${texto}`, '_blank');
+    }
+
+    function resetarContador() {
+        if(confirm("Deseja voltar o pedido para #001?")) {
+            localStorage.setItem('n_benaion', 0);
+            location.reload();
+        }
+    }
+</script>
+
+</body>
+</html>
