@@ -2,521 +2,200 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benaion Delivery - Oficial</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Benaion Delivery | Oficial</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --vermelho: #bc0000; 
-            --amarelo: #f2b705; 
-            --fundo: #f5f5f0; 
-            --sucesso: #25d366; 
-            --escuro: #1a1a1a;
-            --branco: #ffffff;
-        }
+        :root { --primary: #bc0000; --accent: #f2b705; --bg: #000; --card: #111; --text: #fff; --green: #25d366; }
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--bg); color: var(--text); margin: 0; padding-bottom: 30px; }
 
-        * { box-sizing: border-box; }
-        body { 
-            font-family: 'DM Sans', sans-serif; 
-            margin: 0; background: var(--fundo); 
-            color: var(--escuro); scroll-behavior: smooth;
-            padding-bottom: 80px;
-        }
+        nav { position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); height: 60px; display: flex; justify-content: center; align-items: center; z-index: 1000; border-bottom: 2px solid var(--primary); }
+        header { padding: 100px 20px 40px; text-align: center; background: linear-gradient(0deg, #000, #300); }
+        .logo { font-family: 'Oswald'; font-size: 4.5rem; color: var(--accent); margin: 0; line-height: 0.8; font-style: italic; }
 
-        /* Navbar */
-        nav {
-            position: fixed; top: 0; width: 100%; background: var(--escuro);
-            height: 48px; display: flex; justify-content: center; align-items: center;
-            z-index: 1000; border-bottom: 3px solid var(--amarelo);
-        }
-        nav a { color: var(--amarelo); text-decoration: none; margin: 0 10px; font-weight: bold; font-size: 0.7rem; text-transform: uppercase; }
+        .container { max-width: 480px; margin: 0 auto; padding: 0 15px; }
+        .card { background: var(--card); border-radius: 25px; padding: 25px; border: 1px solid #222; margin-top: -30px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
 
-        /* Header Estilo iFood */
-        header { 
-            background: var(--vermelho); color: white; 
-            padding: 70px 20px 40px; text-align: center; 
-            border-bottom: 6px solid var(--amarelo);
-            clip-path: ellipse(150% 100% at 50% 0%);
-        }
+        .peg-banner { background: linear-gradient(45deg, #400, #bc0000); padding: 15px; border-radius: 15px; margin-bottom: 20px; font-size: 0.8rem; border: 1px solid var(--accent); }
         
-        .logo-main { 
-            font-family: 'Oswald', sans-serif; margin: 0; font-style: italic; 
-            font-weight: 900; color: var(--amarelo); font-size: 3.5rem; 
-            line-height: 0.8; text-shadow: 3px 3px 0px #000; 
-            transform: skew(-5deg); letter-spacing: -2px;
-        }
-
-        .container { max-width: 500px; margin: 0 auto; padding: 20px 15px; }
+        label { font-size: 0.65rem; color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; display: block; margin: 15px 0 5px; }
+        input, select, textarea { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #333; background: #000; color: #fff; font-size: 1rem; }
         
-        .card { 
-            background: var(--branco); border-radius: 15px; padding: 20px; 
-            margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
-            border-top: 4px solid var(--vermelho); 
-        }
-
-        h3 { color: var(--vermelho); margin-top: 0; display: flex; align-items: center; gap: 8px; font-size: 1.1rem; }
-
-        /* Grid de Serviços */
-        .service-grid { display: grid; grid-template-cols: 1fr 1fr; gap: 10px; }
-        .service-item { background: #fffdf0; padding: 10px; border-radius: 8px; border: 1px solid #f2b70533; font-weight: bold; font-size: 0.9rem; }
-
-        /* Accordion Preços */
-        .acc-btn {
-            width: 100%; padding: 12px; text-align: left; background: #f8f9fa;
-            border: 1px solid #ddd; border-radius: 8px; margin-bottom: 5px;
-            cursor: pointer; font-weight: bold; display: flex; justify-content: space-between;
-        }
-        .acc-content { display: none; padding: 10px; background: white; border-radius: 0 0 8px 8px; font-size: 0.9rem; border: 1px solid #eee; border-top: none; margin-bottom: 10px; }
-
-        /* Flyer Slider */
-        .flyer-grid { display: flex; overflow-x: auto; gap: 12px; padding: 10px 0; scroll-snap-type: x mandatory; }
-        .flyer-item { flex: 0 0 160px; scroll-snap-align: start; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .flyer-item img { width: 100%; display: block; }
-
-        /* Formulário */
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.8rem; color: #666; }
-        input, textarea, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; }
+        .forbidden { font-size: 0.7rem; color: #ff4444; background: rgba(255,0,0,0.1); padding: 10px; border-radius: 10px; margin-top: 15px; border: 1px solid #400; }
         
-        .btn-enviar { 
-            background: var(--sucesso); color: white; border: none; width: 100%; 
-            padding: 18px; border-radius: 12px; font-weight: bold; font-size: 1.1rem; 
-            cursor: pointer; transition: transform 0.2s;
-        }
-        .btn-enviar:active { transform: scale(0.98); }
+        .btn-order { background: var(--green); color: #000; font-weight: 900; width: 100%; padding: 20px; border-radius: 15px; border: none; font-size: 1.1rem; cursor: pointer; margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
-        /* Botão Flutuante */
-        .whatsapp-float {
-            position: fixed; bottom: 20px; right: 20px; background: var(--sucesso);
-            width: 60px; height: 60px; border-radius: 50%; display: flex;
-            align-items: center; justify-content: center; color: white;
-            font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000;
-        }
-
-        .restricoes { background: #fee2e2; color: #991b1b; padding: 10px; border-radius: 8px; font-size: 0.8rem; margin-top: 10px; }
+        /* Painel Admin */
+        #admin-panel { display: none; position: fixed; inset: 0; background: #000; z-index: 9999; padding: 20px; overflow-y: auto; }
+        .cron-val { font-family: 'Oswald'; font-size: 6rem; color: var(--accent); text-align: center; margin: 20px 0; }
     </style>
 </head>
 <body>
 
-<nav>
-    <a href="#servicos">Serviços</a>
-    <a href="#precos">Taxas</a>
-    <a href="#comanda">Fazer Pedido</a>
-</nav>
+<nav><div style="font-family:'Oswald'; color:var(--accent); font-size:1.5rem;">BENAION DELIVERY</div></nav>
 
 <header>
-    <h1 class="logo-main" onclick="ativarAdmin()">BENAION</h1>
-    <p style="margin:0; letter-spacing: 4px; font-weight: bold; font-size: 0.8rem;">DELIVERY EM LARANJAL DO JARI</p>
+    <h1 class="logo">BENAION</h1>
+    <p style="color:#666; font-size:0.7rem; letter-spacing:5px; font-weight:800;">Laranjal do Jari/AP</p>
 </header>
 
 <div class="container">
-    
-    <section id="servicos" class="card">
-        <h3><i class="fas fa-box"></i> O que entregamos</h3>
-        <div class="service-grid">
-            <div class="service-item">💊 Farmácia</div>
-            <div class="service-item">🛒 Comércio</div>
-            <div class="service-item">🍞 Padaria</div>
-            <div class="service-item">📦 Encomendas</div>
-            <div class="service-item">🔑 Pessoais</div>
-            <div class="service-item">🍔 Alimentação</div>
-        </div>
-        <div class="restricoes">
-            <strong>🚫 NÃO ENTREGAMOS:</strong> Bebidas alcoólicas, cigarros, drogas ou transporte de pessoas.
-        </div>
-    </section>
-
-    <section id="precos" class="card">
-        <h3><i class="fas fa-motorcycle"></i> Taxas de Entrega</h3>
-        <button class="acc-btn" onclick="toggleAcc('taxa-bairro')">Ver por Bairro <span>+</span></button>
-        <div id="taxa-bairro" class="acc-content">
-            <ul style="list-style: none; padding: 0; margin: 0;">
-                <li>📍 Agreste / N. Esperança / Prosperidade: <b>R$ 5,00</b></li>
-                <li>📍 Castanheira / Mirilândia / J. Cesário: <b>R$ 5,00</b></li>
-                <li>📍 Cajari / Centro: <b>R$ 6,00</b></li>
-                <li>📍 Buritizal / Sarney / Rod. do Gogó: <b>R$ 7,00</b></li>
-                <li>📍 Rio Branco / Centro-Beira Rio: <b>R$ 7,00</b></li>
-                <li>📍 Malvinas: <b>R$ 8,00</b></li>
-                <li>📍 Nazaré Mineiro: <b>R$ 10,00</b></li>
-                <li>📍 Samaúma: <b>R$ 15,00</b></li>
-                <li>📍 Monte Dourado: <b>R$ 30,00</b></li>
-            </ul>
-        </div>
-
-        <button class="acc-btn" onclick="toggleAcc('taxa-extra')">Adicionais de Esforço <span>+</span></button>
-        <div id="taxa-extra" class="acc-content">
-            • Subir Escadas: <b>R$ 2,00 por andar</b><br>
-            • Entrar em Pontes: <b>R$ 0,05 por metro</b><br>
-            • Tempo de espera: <b>R$ 0,30/min</b> (após 3min)
-        </div>
-    </section>
-
     <div class="card">
-        <h3><i class="fas fa-fire"></i> Promoções e Parceiros</h3>
-        <div class="flyer-grid">
-            <div class="flyer-item"><img src="https://i.postimg.cc/XJwXkcfP/Post_para_Instagram_Encomende_seu_Frango_Assado_Gastronômico_Marrom_20250910_122450_0000.png"></div>
-            <div class="flyer-item"><img src="https://i.postimg.cc/L525CYvJ/Post_Instagram_açaí_entrega_grátis_simples_roxo_20260122_073356_0000.png"></div>
-            <div class="flyer-item"><img src="https://i.postimg.cc/Y0M0nG8j/Marrom_Pão_Cesta_Padaria_Cardápio_20260213_053737_0000.png"></div>
-            <div class="flyer-item"><img src="https://i.postimg.cc/bvPKpJCF/1_20260204_161355_0000.png"></div>
+        <div class="peg-banner">
+            <strong>🎁 PROMOÇÃO PEG:</strong> A cada 5 pedidos em 7 dias, ganhe 1 taxa base grátis!
         </div>
-    </div>
 
-    <section id="comanda" class="card">
-        <h3><i class="fas fa-file-alt"></i> Comanda de Pedido</h3>
-        <div class="form-group">
-            <label>NOME DO CLIENTE:</label>
-            <input type="text" id="cliente" placeholder="Como te chamamos?">
-        </div>
-        <div class="form-group">
-            <label>ONDE BUSCAMOS? (RETIRADA):</label>
-            <input type="text" id="retirada" placeholder="Local ou nome da loja">
-        </div>
-        <div class="form-group">
-            <label>O QUE VAMOS BUSCAR?</label>
-            <textarea id="produto" rows="3" placeholder="Ex: 1 Marmitex média e 1 suco"></textarea>
-        </div>
-        <div class="form-group">
-            <label>ONDE ENTREGAMOS? (DESTINO):</label>
-            <input type="text" id="entrega" placeholder="Seu endereço completo">
-        </div>
-        <div class="form-group">
-            <label>FORMA DE PAGAMENTO:</label>
-            <select id="pagamento">
-                <option value="PIX">PIX</option>
-                <option value="CARTÃO">Cartão (Levamos a máquina)</option>
-                <option value="DINHEIRO">Dinheiro</option>
-            </select>
-        </div>
-        <button class="btn-enviar" onclick="enviarPedido()">ENVIAR PEDIDO AGORA 🛵</button>
-        <button id="btn-admin" style="display:none; margin-top:10px; width:100%; padding:10px; background:#444; color:white; border:none; border-radius:8px;" onclick="resetarContador()">Reiniciar Comanda</button>
-    </section>
+        <label>Seu Nome</label>
+        <input type="text" id="c_nome" placeholder="Nome completo">
 
-    <div style="text-align: center; font-size: 0.8rem; color: #888; padding: 20px;">
-        <b>Benaion Delivery</b> - Desde 2023<br>
-        Seg à Sex: 07:30 às 18:00
+        <label>Bairro de Entrega</label>
+        <select id="c_bairro" onchange="updateTax()">
+            <option value="0" data-t="0">Selecione o bairro...</option>
+            <option value="Agreste" data-t="5">Agreste (R$ 5,00)</option>
+            <option value="Nova Esperança" data-t="5">Nova Esperança (R$ 5,00)</option>
+            <option value="Prosperidade" data-t="5">Prosperidade (R$ 5,00)</option>
+            <option value="Castanheira" data-t="5">Castanheira (R$ 5,00)</option>
+            <option value="Mirilandia" data-t="5">Mirilandia (R$ 5,00)</option>
+            <option value="José Cesário" data-t="5">José Cesário (R$ 5,00)</option>
+            <option value="Centro" data-t="6">Centro (R$ 6,00)</option>
+            <option value="Cajari" data-t="6">Cajari (R$ 6,00)</option>
+            <option value="Rodovia do Gogó" data-t="7">Rodovia do Gogó (R$ 7,00)</option>
+            <option value="Buritizal" data-t="7">Buritizal (R$ 7,00)</option>
+            <option value="Sarney" data-t="7">Sarney (R$ 7,00)</option>
+            <option value="Rio Branco" data-t="7">Rio Branco (R$ 7,00)</option>
+            <option value="Malvinas" data-t="8">Malvinas (R$ 8,00)</option>
+            <option value="Nazaré Mineiro" data-t="10">Nazaré Mineiro (R$ 10,00)</option>
+            <option value="Samaúma" data-t="15">Samaúma (R$ 15,00)</option>
+            <option value="Monte Dourado" data-t="30">Monte Dourado (R$ 30,00)</option>
+        </select>
+
+        <div id="tax-box" style="display:none; text-align:center; margin:15px 0;">
+            <span style="font-size:0.7rem; color:var(--accent)">TAXA BASE:</span><br>
+            <span id="tax-val" style="font-size:2.5rem; font-family:'Oswald'; color:white;">R$ 0,00</span>
+        </div>
+
+        <label>Deseja usar sua entrega grátis (PEG)?</label>
+        <select id="c_peg">
+            <option value="Não">Não (Seguir com cobrança normal)</option>
+            <option value="SIM! QUERO USAR MINHA ENTREGA GRÁTIS!">✅ Sim, quero usar meu bônus!</option>
+        </select>
+
+        <label>Endereço de Retirada (Onde buscar?)</label>
+        <input type="text" id="c_retirada" placeholder="Ex: Mercantil Jari">
+
+        <label>Qual produto?</label>
+        <textarea id="c_produto" rows="2" placeholder="Descreva o que vamos buscar"></textarea>
+
+        <label>Endereço de Entrega (Rua e Nº)</label>
+        <input type="text" id="c_entrega" placeholder="Rua, número e referência">
+
+        <label>Forma de Pagamento</label>
+        <select id="c_pag">
+            <option value="PIX">PIX</option>
+            <option value="Cartão">Cartão</option>
+            <option value="Dinheiro">Dinheiro</option>
+        </select>
+
+        <label>Troco (Se necessário)</label>
+        <input type="text" id="c_troco" placeholder="Troco para quanto?">
+
+        <label>Agendar para às (Opcional)</label>
+        <input type="time" id="c_hora">
+
+        <div class="forbidden">
+            <strong>⚠️ NÃO ENTREGAMOS:</strong> Bebidas, Cigarros, Drogas e Pessoas.
+        </div>
+
+        <button onclick="enviarPedido()" class="btn-order">ENVIAR COMANDA <i class="fab fa-whatsapp"></i></button>
     </div>
 </div>
 
-<a href="https://wa.me/5596991677854" class="whatsapp-float" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-</a>
-
-<script>
-    function toggleAcc(id) {
-        const content = document.getElementById(id);
-        const isVisible = content.style.display === "block";
-        document.querySelectorAll('.acc-content').forEach(el => el.style.display = 'none');
-        content.style.display = isVisible ? "none" : "block";
-    }
-
-    let cliquesAdmin = 0;
-    function ativarAdmin() {
-        cliquesAdmin++;
-        if(cliquesAdmin >= 5) {
-            document.getElementById('btn-admin').style.display = 'block';
-            alert("Modo Admin Ativo");
-        }
-    }
-
-    function enviarPedido() {
-        const cliente = document.getElementById('cliente').value;
-        const retirada = document.getElementById('retirada').value;
-        const produto = document.getElementById('produto').value;
-        const entrega = document.getElementById('entrega').value;
-        const pagamento = document.getElementById('pagamento').value;
-
-        if(!cliente || !retirada || !produto || !entrega) {
-            alert("Preencha todos os campos!");
-            return;
-        }
-
-        let n = localStorage.getItem('n_benaion') || 0;
-        n = parseInt(n) + 1;
-        localStorage.setItem('n_benaion', n);
-        const num = n.toString().padStart(3, '0');
-
-        const texto = `*BENAION DELIVERY - PEDIDO #${num}*%0A` +
-                      `----------------------------%0A` +
-                      `*Cliente:* ${cliente}%0A` +
-                      `*Retirada:* ${retirada}%0A` +
-                      `*Produtos:* ${produto}%0A` +
-                      `*Destino:* ${entrega}%0A` +
-                      `*Pagamento:* ${pagamento}%0A` +
-                      `----------------------------`;
-
-        window.open(`https://wa.me/5596991677854?text=${texto}`, '_blank');
-    }
-
-    function resetarContador() {
-        if(confirm("Deseja voltar o pedido para #001?")) {
-            localStorage.setItem('n_benaion', 0);
-            location.reload();
-        }
-    }
-</script>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benaion Delivery - Oficial</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root { 
-            --vermelho: #bc0000; 
-            --amarelo: #f2b705; 
-            --fundo: #f5f5f0; 
-            --sucesso: #25d366; 
-            --escuro: #1a1a1a;
-            --branco: #ffffff;
-        }
-
-        * { box-sizing: border-box; }
-        body { 
-            font-family: 'DM Sans', sans-serif; 
-            margin: 0; background: var(--fundo); 
-            color: var(--escuro); scroll-behavior: smooth;
-            padding-bottom: 80px;
-        }
-
-        /* Navbar */
-        nav {
-            position: fixed; top: 0; width: 100%; background: var(--escuro);
-            height: 48px; display: flex; justify-content: center; align-items: center;
-            z-index: 1000; border-bottom: 3px solid var(--amarelo);
-        }
-        nav a { color: var(--amarelo); text-decoration: none; margin: 0 10px; font-weight: bold; font-size: 0.7rem; text-transform: uppercase; }
-
-        /* Header Estilo iFood */
-        header { 
-            background: var(--vermelho); color: white; 
-            padding: 70px 20px 40px; text-align: center; 
-            border-bottom: 6px solid var(--amarelo);
-            clip-path: ellipse(150% 100% at 50% 0%);
-        }
-        
-        .logo-main { 
-            font-family: 'Oswald', sans-serif; margin: 0; font-style: italic; 
-            font-weight: 900; color: var(--amarelo); font-size: 3.5rem; 
-            line-height: 0.8; text-shadow: 3px 3px 0px #000; 
-            transform: skew(-5deg); letter-spacing: -2px;
-        }
-
-        .container { max-width: 500px; margin: 0 auto; padding: 20px 15px; }
-        
-        .card { 
-            background: var(--branco); border-radius: 15px; padding: 20px; 
-            margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
-            border-top: 4px solid var(--vermelho); 
-        }
-
-        h3 { color: var(--vermelho); margin-top: 0; display: flex; align-items: center; gap: 8px; font-size: 1.1rem; }
-
-        /* Grid de Serviços */
-        .service-grid { display: grid; grid-template-cols: 1fr 1fr; gap: 10px; }
-        .service-item { background: #fffdf0; padding: 10px; border-radius: 8px; border: 1px solid #f2b70533; font-weight: bold; font-size: 0.9rem; }
-
-        /* Accordion Preços */
-        .acc-btn {
-            width: 100%; padding: 12px; text-align: left; background: #f8f9fa;
-            border: 1px solid #ddd; border-radius: 8px; margin-bottom: 5px;
-            cursor: pointer; font-weight: bold; display: flex; justify-content: space-between;
-        }
-        .acc-content { display: none; padding: 10px; background: white; border-radius: 0 0 8px 8px; font-size: 0.9rem; border: 1px solid #eee; border-top: none; margin-bottom: 10px; }
-
-        /* Flyer Slider */
-        .flyer-grid { display: flex; overflow-x: auto; gap: 12px; padding: 10px 0; scroll-snap-type: x mandatory; }
-        .flyer-item { flex: 0 0 160px; scroll-snap-align: start; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .flyer-item img { width: 100%; display: block; }
-
-        /* Formulário */
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.8rem; color: #666; }
-        input, textarea, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; }
-        
-        .btn-enviar { 
-            background: var(--sucesso); color: white; border: none; width: 100%; 
-            padding: 18px; border-radius: 12px; font-weight: bold; font-size: 1.1rem; 
-            cursor: pointer; transition: transform 0.2s;
-        }
-        .btn-enviar:active { transform: scale(0.98); }
-
-        /* Botão Flutuante */
-        .whatsapp-float {
-            position: fixed; bottom: 20px; right: 20px; background: var(--sucesso);
-            width: 60px; height: 60px; border-radius: 50%; display: flex;
-            align-items: center; justify-content: center; color: white;
-            font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000;
-        }
-
-        .restricoes { background: #fee2e2; color: #991b1b; padding: 10px; border-radius: 8px; font-size: 0.8rem; margin-top: 10px; }
-    </style>
-</head>
-<body>
-
-<nav>
-    <a href="#servicos">Serviços</a>
-    <a href="#precos">Taxas</a>
-    <a href="#comanda">Fazer Pedido</a>
-</nav>
-
-<header>
-    <h1 class="logo-main" onclick="ativarAdmin()">BENAION</h1>
-    <p style="margin:0; letter-spacing: 4px; font-weight: bold; font-size: 0.8rem;">DELIVERY EM LARANJAL DO JARI</p>
-</header>
-
-<div class="container">
-    
-    <section id="servicos" class="card">
-        <h3><i class="fas fa-box"></i> O que entregamos</h3>
-        <div class="service-grid">
-            <div class="service-item">💊 Farmácia</div>
-            <div class="service-item">🛒 Comércio</div>
-            <div class="service-item">🍞 Padaria</div>
-            <div class="service-item">📦 Encomendas</div>
-            <div class="service-item">🔑 Pessoais</div>
-            <div class="service-item">🍔 Alimentação</div>
-        </div>
-        <div class="restricoes">
-            <strong>🚫 NÃO ENTREGAMOS:</strong> Bebidas alcoólicas, cigarros, drogas ou transporte de pessoas.
-        </div>
-    </section>
-
-    <section id="precos" class="card">
-        <h3><i class="fas fa-motorcycle"></i> Taxas de Entrega</h3>
-        <button class="acc-btn" onclick="toggleAcc('taxa-bairro')">Ver por Bairro <span>+</span></button>
-        <div id="taxa-bairro" class="acc-content">
-            <ul style="list-style: none; padding: 0; margin: 0;">
-                <li>📍 Agreste / N. Esperança / Prosperidade: <b>R$ 5,00</b></li>
-                <li>📍 Castanheira / Mirilândia / J. Cesário: <b>R$ 5,00</b></li>
-                <li>📍 Cajari / Centro: <b>R$ 6,00</b></li>
-                <li>📍 Buritizal / Sarney / Rod. do Gogó: <b>R$ 7,00</b></li>
-                <li>📍 Rio Branco / Centro-Beira Rio: <b>R$ 7,00</b></li>
-                <li>📍 Malvinas: <b>R$ 8,00</b></li>
-                <li>📍 Nazaré Mineiro: <b>R$ 10,00</b></li>
-                <li>📍 Samaúma: <b>R$ 15,00</b></li>
-                <li>📍 Monte Dourado: <b>R$ 30,00</b></li>
-            </ul>
-        </div>
-
-        <button class="acc-btn" onclick="toggleAcc('taxa-extra')">Adicionais de Esforço <span>+</span></button>
-        <div id="taxa-extra" class="acc-content">
-            • Subir Escadas: <b>R$ 2,00 por andar</b><br>
-            • Entrar em Pontes: <b>R$ 0,05 por metro</b><br>
-            • Tempo de espera: <b>R$ 0,30/min</b> (após 3min)
-        </div>
-    </section>
-
-    <div class="card">
-        <h3><i class="fas fa-fire"></i> Promoções e Parceiros</h3>
-        <div class="flyer-grid">
-            <div class="flyer-item"><img src="https://i.postimg.cc/XJwXkcfP/Post_para_Instagram_Encomende_seu_Frango_Assado_Gastronômico_Marrom_20250910_122450_0000.png"></div>
-            <div class="flyer-item"><img src="https://i.postimg.cc/L525CYvJ/Post_Instagram_açaí_entrega_grátis_simples_roxo_20260122_073356_0000.png"></div>
-            <div class="flyer-item"><img src="https://i.postimg.cc/Y0M0nG8j/Marrom_Pão_Cesta_Padaria_Cardápio_20260213_053737_0000.png"></div>
-            <div class="flyer-item"><img src="https://i.postimg.cc/bvPKpJCF/1_20260204_161355_0000.png"></div>
-        </div>
+<div id="admin-panel">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h2 style="font-family:'Oswald'; color:var(--accent);">BENAION CONTROL</h2>
+        <button onclick="fecharAdmin()" style="background:red; color:#fff; border:none; padding:10px 15px; border-radius:10px;">X</button>
     </div>
-
-    <section id="comanda" class="card">
-        <h3><i class="fas fa-file-alt"></i> Comanda de Pedido</h3>
-        <div class="form-group">
-            <label>NOME DO CLIENTE:</label>
-            <input type="text" id="cliente" placeholder="Como te chamamos?">
-        </div>
-        <div class="form-group">
-            <label>ONDE BUSCAMOS? (RETIRADA):</label>
-            <input type="text" id="retirada" placeholder="Local ou nome da loja">
-        </div>
-        <div class="form-group">
-            <label>O QUE VAMOS BUSCAR?</label>
-            <textarea id="produto" rows="3" placeholder="Ex: 1 Marmitex média e 1 suco"></textarea>
-        </div>
-        <div class="form-group">
-            <label>ONDE ENTREGAMOS? (DESTINO):</label>
-            <input type="text" id="entrega" placeholder="Seu endereço completo">
-        </div>
-        <div class="form-group">
-            <label>FORMA DE PAGAMENTO:</label>
-            <select id="pagamento">
-                <option value="PIX">PIX</option>
-                <option value="CARTÃO">Cartão (Levamos a máquina)</option>
-                <option value="DINHEIRO">Dinheiro</option>
-            </select>
-        </div>
-        <button class="btn-enviar" onclick="enviarPedido()">ENVIAR PEDIDO AGORA 🛵</button>
-        <button id="btn-admin" style="display:none; margin-top:10px; width:100%; padding:10px; background:#444; color:white; border:none; border-radius:8px;" onclick="resetarContador()">Reiniciar Comanda</button>
-    </section>
-
-    <div style="text-align: center; font-size: 0.8rem; color: #888; padding: 20px;">
-        <b>Benaion Delivery</b> - Desde 2023<br>
-        Seg à Sex: 07:30 às 18:00
+    <div class="cron-val" id="cron-val">00:00</div>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+        <button onclick="startCron()" style="background:var(--green); padding:20px; border-radius:15px; font-weight:900; border:none;">CHEGUEI</button>
+        <button onclick="stopCron()" style="background:white; padding:20px; border-radius:15px; font-weight:900; border:none;">SAÍ</button>
+    </div>
+    <div id="admin-calc" style="background:#111; padding:20px; border-radius:20px; margin-top:20px; border:1px solid #333;">
+        <label>Volume Extra</label>
+        <select id="adm_vol"><option value="0">Nenhum</option><option value="2">Metade Bag (R$ 2)</option><option value="5">Bag Cheia (R$ 5)</option></select>
+        <label>Minutos Totais</label>
+        <input type="number" id="adm_min">
+        <label>Compras R$</label>
+        <input type="number" id="adm_compras">
+        <button onclick="gerarRecibo()" class="btn-order" style="background:var(--accent); color:#000;">GERAR RECIBO FINAL</button>
+        <div id="recibo-final" style="margin-top:20px; font-family:monospace; color:var(--accent); white-space:pre-wrap; background:#000; padding:15px; border:1px dashed #444;"></div>
     </div>
 </div>
 
-<a href="https://wa.me/5596991677854" class="whatsapp-float" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-</a>
+<footer style="text-align:center; padding:50px; opacity:0.1;"><button onclick="acessoAdmin()" style="background:none; border:none; color:#fff; cursor:pointer;">STAFF ONLY</button></footer>
 
 <script>
-    function toggleAcc(id) {
-        const content = document.getElementById(id);
-        const isVisible = content.style.display === "block";
-        document.querySelectorAll('.acc-content').forEach(el => el.style.display = 'none');
-        content.style.display = isVisible ? "none" : "block";
-    }
+    function acessoAdmin() { if(prompt("Senha:") === "1010") document.getElementById('admin-panel').style.display='block'; }
+    function fecharAdmin() { document.getElementById('admin-panel').style.display='none'; }
 
-    let cliquesAdmin = 0;
-    function ativarAdmin() {
-        cliquesAdmin++;
-        if(cliquesAdmin >= 5) {
-            document.getElementById('btn-admin').style.display = 'block';
-            alert("Modo Admin Ativo");
-        }
+    function updateTax() {
+        const s = document.getElementById('c_bairro');
+        const t = s.options[s.selectedIndex].getAttribute('data-t');
+        document.getElementById('tax-val').innerText = `R$ ${t},00`;
+        document.getElementById('tax-box').style.display = t > 0 ? 'block' : 'none';
     }
 
     function enviarPedido() {
-        const cliente = document.getElementById('cliente').value;
-        const retirada = document.getElementById('retirada').value;
-        const produto = document.getElementById('produto').value;
-        const entrega = document.getElementById('entrega').value;
-        const pagamento = document.getElementById('pagamento').value;
+        const n = document.getElementById('c_nome').value;
+        const b = document.getElementById('c_bairro').value;
+        const p = document.getElementById('c_produto').value;
+        const peg = document.getElementById('c_peg').value;
+        if(!n || b=="0" || !p) return alert("Preencha Nome, Bairro e Produto!");
 
-        if(!cliente || !retirada || !produto || !entrega) {
-            alert("Preencha todos os campos!");
-            return;
-        }
-
-        let n = localStorage.getItem('n_benaion') || 0;
-        n = parseInt(n) + 1;
-        localStorage.setItem('n_benaion', n);
-        const num = n.toString().padStart(3, '0');
-
-        const texto = `*BENAION DELIVERY - PEDIDO #${num}*%0A` +
-                      `----------------------------%0A` +
-                      `*Cliente:* ${cliente}%0A` +
-                      `*Retirada:* ${retirada}%0A` +
-                      `*Produtos:* ${produto}%0A` +
-                      `*Destino:* ${entrega}%0A` +
-                      `*Pagamento:* ${pagamento}%0A` +
-                      `----------------------------`;
-
-        window.open(`https://wa.me/5596991677854?text=${texto}`, '_blank');
+        const comanda = `*BENAION DELIVERY - PEDIDO*%0A` +
+                        `*PROMOÇÃO:* ${peg}%0A` +
+                        `----------------------------%0A` +
+                        `*CLIENTE🙋‍♂️:* ${n}%0A` +
+                        `*ENDEREÇO DE RETIRADA🛒:* ${document.getElementById('c_retirada').value}%0A` +
+                        `*QUAL PRODUTO:* ${p}%0A` +
+                        `*ENDEREÇO DE ENTREGA🏡:* ${b}, ${document.getElementById('c_entrega').value}%0A` +
+                        `*FORMA DE PAGAMENTO💰:* ${document.getElementById('c_pag').value}%0A` +
+                        `*TROCO💱:* ${document.getElementById('c_troco').value}%0A` +
+                        `*AGENDAR:* ${document.getElementById('c_hora').value}%0A` +
+                        `----------------------------%0A` +
+                        `*BIT.LY/BENAIONDELIVERY*`;
+        window.open(`https://wa.me/5596991677854?text=${comanda}`);
     }
 
-    function resetarContador() {
-        if(confirm("Deseja voltar o pedido para #001?")) {
-            localStorage.setItem('n_benaion', 0);
-            location.reload();
-        }
+    let t_start, t_int;
+    function startCron() { t_start = Date.now(); t_int = setInterval(()=>{
+        const d = Date.now()-t_start;
+        const m = Math.floor(d/60000).toString().padStart(2,'0');
+        const s = Math.floor((d%60000)/1000).toString().padStart(2,'0');
+        document.getElementById('cron-val').innerText = `${m}:${s}`;
+    }, 1000); }
+    function stopCron() { clearInterval(t_int); document.getElementById('adm_min').value = Math.floor((Date.now()-t_start)/60000); }
+
+    function gerarRecibo() {
+        const m = parseInt(document.getElementById('adm_min').value) || 0;
+        const c = parseFloat(document.getElementById('adm_compras').value) || 0;
+        const v = parseFloat(document.getElementById('adm_vol').value) || 0;
+        const s = document.getElementById('c_bairro');
+        const t = parseFloat(s.options[s.selectedIndex].getAttribute('data-t')) || 0;
+        const extra = m > 3 ? (m-3)*0.3 : 0;
+        const total = t + c + extra + v;
+
+        document.getElementById('recibo-final').innerText = 
+            `✅ *RECIBO BENAION DELIVERY*\n` +
+            `Taxa Bairro: R$ ${t.toFixed(2)}\n` +
+            `Tempo (${m} min): R$ ${extra.toFixed(2)}\n` +
+            `Volume/Bag: R$ ${v.toFixed(2)}\n` +
+            `Compras: R$ ${c.toFixed(2)}\n` +
+            `---------------------------\n` +
+            `*TOTAL: R$ ${total.toFixed(2)}*`;
     }
 </script>
-
 </body>
 </html>
