@@ -1,0 +1,15 @@
+{
+  "name": "Benaion Delivery",
+  "short_name": "Benaion",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#bc0000",
+  "theme_color": "#bc0000",
+  "icons": [
+    {
+      "src": "https://i.postimg.cc/bvPKpJCF/1_20260204_161355_0000.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
